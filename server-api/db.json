@@ -1,14 +1,24 @@
 {
-    "contacts": [
-        {
-            "id":"e7e725b3-8fcf-451d-9e3d-b1246a8b31b7",
-            "name":"AHMAD SYAHRIL BIN ABD MAJID",
-            "email":"ahmadsyahrilam@gmail.com"
-        },
-        {
-            "id":"3993cefd-4662-438a-bf60-ee55bc801056",
-            "name":"SYAHRIL",
-            "email":"syahril@mail.com"
-        }
-    ]
+  "contacts": [
+    {
+      "id": "e7e725b3-8fcf-451d-9e3d-b1246a8b31b7",
+      "name": "AHMAD SYAHRIL BIN ABD MAJID",
+      "email": "ahmadsyahrilam@gmail.com"
+    },
+    {
+      "id": "3993cefd-4662-438a-bf60-ee55bc801056",
+      "name": "SYAHRIL",
+      "email": "syahril@mail.com"
+    },
+    {
+      "id": "e8584e86-ac32-4cbf-bd81-eace02ba979d",
+      "name": "aaaaaaa",
+      "email": "aa@as.som"
+    },
+    {
+      "id": "5cc22562-e8d5-4f88-9e5d-d004fb0a49d1",
+      "name": "meow",
+      "email": "kitty@cat.com"
+    }
+  ]
 }

@@ -4,6 +4,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { uuid } from 'uuidv4';
+import api from '../api/contacts';
 import Header from './Header';
 import AddContact from './AddContact';
 import ContactList from './ContactList';
@@ -11,27 +12,25 @@ import ContactDetail from './ContactDetail';
 
 function App() {
 
-  //RENDERING LIST
-
-  //-contactArray-
-  // const contacts = [
-  //   {
-  //     id: "1",
-  //     name: "Syahril",
-  //     email: "ahmadsyahrilam@gmail.com"
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Ahmad",
-  //     email: "ahmadsyahrilabdmajid@gmail.com"
-  //   }
-  // ]
   const LOCAL_STORAGE_KEY = "contacts" //key
   const [contacts, setContacts] = useState([])
-  const addContactHandler = (contact) => {
+
+  //RetrieveContacts
+  //to be in asynchronize mode need to use async,await and return promise 
+  const retrieveContacts = async () => {
+    const response = await api.get("/contacts");
+    return response.data;
+  }
+
+  const addContactHandler = async (contact) => {
     console.log(contact)
-    //get previous state of the contacts
-    setContacts([...contacts, { id: uuid(), ...contact}]);
+    //create new request
+    const request = {
+      id: uuid(),
+      ...contact //destructuring of the contact
+    }
+    const response = await api.post("/contacts", request) //call api
+    setContacts([...contacts, response.data]); 
   };
 
     /**
@@ -45,17 +44,20 @@ function App() {
         return contact.id !== id;
       });
 
-      //change contact state
-      setContacts(newContactList)
+      setContacts(newContactList) //change contact state
     }
 
     /** grab information from local storage and display it
      * after get the data, store in variable
     */
     useEffect(() => {
-      const retrieveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-        //retrieve contacts if contacts available
-        if (retrieveContacts) setContacts(retrieveContacts); 
+        // const retrieveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+        // if (retrieveContacts) setContacts(retrieveContacts); 
+        const getAllContacts = async () => {
+          const allContacts = await retrieveContacts();
+          if(allContacts) setContacts(allContacts);
+        };
+        getAllContacts()
       }, []);
 
     /** if refresh the page, data will gone so use localstorage to process data.
@@ -64,7 +66,7 @@ function App() {
      * to check if the data inside the local storage go to inspect > application > local storage
     * */ 
     useEffect(() => {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts)) //add key
+      // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts)) //add key
     }, [contacts]); //add dependancies
   /*
   * ContactList: in order to pass in contact list (array), need to use props
