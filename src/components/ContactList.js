@@ -5,6 +5,10 @@ import ContactCard from "./ContactCard";
 const ContactList = (props) => {
     console.log(props);
 
+    const deleteContactHandler = (id) => {
+        props.getContactId(id);
+    };
+
     /* 
     * create function to render contact list
     * this function going to take props.contact and map it
@@ -18,10 +22,10 @@ const ContactList = (props) => {
             //     </div>
             //     <i className="trash alternate outline icon"></i>
             // </div>
-
             //Above code is remove to contactCard and replace with code: <ContactCard></ContactCard>
 
-            <ContactCard contact={contact}></ContactCard>
+            //passing clickHandler from innerchild to its parent, and parent to its parent which is contactCard will give id to contactList, from contactList to App.js
+            <ContactCard contact={contact} clickHandler = {deleteContactHandler} key={contact.id}></ContactCard>
         );
     })
 

@@ -2,6 +2,7 @@
 // has own functionality and output
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import { uuid } from 'uuidv4';
 import Header from './Header';
 import AddContact from './AddContact';
 import ContactList from './ContactList';
@@ -28,8 +29,23 @@ function App() {
   const addContactHandler = (contact) => {
     console.log(contact)
     //get previous state of the contacts
-    setContacts([...contacts, contact])
+    setContacts([...contacts, { id: uuid(), ...contact}]);
   };
+
+    /**
+     * Delete contact, based on id
+     * create copy of the contact first
+     * pass the handler at return --> 'getContactId={removeContactHandler}' 
+     */
+    const removeContactHandler = (id) => {
+                              //get copy then filter out contact
+      const newContactList = contacts.filter((contact) => {
+        return contact.id !== id;
+      });
+
+      //change contact state
+      setContacts(newContactList)
+    }
 
     /** grab information from local storage and display it
      * after get the data, store in variable
@@ -58,7 +74,7 @@ function App() {
       <div className="ui container">
         <Header />
         <AddContact addContactHandler={addContactHandler} />
-        <ContactList contacts={contacts}/>
+        <ContactList contacts={contacts} getContactId={removeContactHandler}/>
       </div>
   );
 }
