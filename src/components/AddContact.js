@@ -18,6 +18,9 @@ class AddContact extends React.Component {
 
             //clear the fields (state) after click add button
             this.setState({name: "", email: ""})
+
+            //after clear field, need to go back contactList page
+            this.props.history.push("/")
         }
     render(){
         return(

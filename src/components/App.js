@@ -61,7 +61,7 @@ function App() {
      * to use local storage, use reactHook --> useEffect().
      * value change, component is render again 
      * to check if the data inside the local storage go to inspect > application > local storage
-    * */
+    * */ 
     useEffect(() => {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts)) //add key
     }, [contacts]); //add dependancies
@@ -78,19 +78,20 @@ function App() {
           <Header />
           <Switch>
             <Route path="/" exact 
-              component={() => (
-                <ContactList contacts={contacts} getContactId={removeContactHandler} />
-              )} 
+              render = {(props) => (
+                <ContactList {...props} contacts={contacts} getContactId={removeContactHandler}/>
+              )}
             />
             <Route path="/add" 
-              component={() => (
-                <AddContact addContactHandler={addContactHandler}/>
-              )} 
+              render = {(props) => (
+                <AddContact {...props} addContactHandler={addContactHandler}/>
+              )}
+              // component={() => (
+              //   <AddContact addContactHandler={addContactHandler}/>
+              // )} 
             />
 
           </Switch>
-          {/* <AddContact addContactHandler={addContactHandler} />
-          <ContactList contacts={contacts} getContactId={removeContactHandler}/> */}
         </Router>
       </div>
   );
