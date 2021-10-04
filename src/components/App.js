@@ -15,6 +15,8 @@ function App() {
 
   const LOCAL_STORAGE_KEY = "contacts" //key
   const [contacts, setContacts] = useState([])
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([])
 
   //RetrieveContacts
   //to be in asynchronize mode need to use async,await and return promise 
@@ -63,6 +65,20 @@ function App() {
       setContacts(newContactList) //change contact state
     }
 
+    const searcHandler = (searchTerm) => {
+      // console.log(searchTerm);
+      setSearchTerm(searchTerm);
+      if(searchTerm !== ""){
+        const newContactList = contacts.filter((contact) => {
+          return Object.values(contact).join(" ").toLowerCase().includes(searchTerm.toLowerCase());
+        })
+        setSearchResults(newContactList);
+      }
+      else {
+        setSearchResults(contacts);
+      }
+    }
+
     /** grab information from local storage and display it
      * after get the data, store in variable
     */
@@ -98,7 +114,13 @@ function App() {
           <Switch>
             <Route path="/" exact 
               render = {(props) => (
-                <ContactList {...props} contacts={contacts} getContactId={removeContactHandler}/>
+                <ContactList 
+                  {...props} 
+                  contacts={searchTerm.length < 1 ? contacts : searchResults} 
+                  getContactId={removeContactHandler} 
+                  term = {searchTerm} 
+                  searchKeyword = {searcHandler}
+                />
               )}
             />
             <Route path="/add" 
