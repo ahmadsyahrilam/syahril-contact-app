@@ -9,6 +9,7 @@ import Header from './Header';
 import AddContact from './AddContact';
 import ContactList from './ContactList';
 import ContactDetail from './ContactDetail'; 
+import EditContact from './EditContact';
 
 function App() {
 
@@ -22,18 +23,30 @@ function App() {
     return response.data;
   }
 
-  const addContactHandler = async (contact) => {
-    console.log(contact)
-    //create new request
-    const request = {
-      id: uuid(),
-      ...contact //destructuring of the contact
-    }
+    const addContactHandler = async (contact) => {
+      console.log(contact)
+      //create new request
+      const request = {
+        id: uuid(),
+        ...contact //destructuring of the contact
+      }
 
-    const response = await api.post("/contacts", request) //call api
-    console.log(response);
-    setContacts([...contacts, response.data]); 
+      const response = await api.post("/contacts", request) //call api
+      console.log(response);
+      setContacts([...contacts, response.data]); 
   };
+
+    const updateContactHandler = async (contact) => {
+      const response = await api.put(`/contacts/${contact.id}`, contact) //<- contact here pass new value
+      
+      //update state with new value
+      const { id, name, email} = response.data;
+        setContacts( contacts.map((contact) => {
+        //check if the contact have id match on the id from response, else return old contact
+        return contact.id === id ? {...response.data} : contact;
+        })
+      )
+    }
 
     /**
      * Delete contact, based on id
@@ -92,9 +105,11 @@ function App() {
               render = {(props) => (
                 <AddContact {...props} addContactHandler={addContactHandler}/>
               )}
-              // component={() => (
-              //   <AddContact addContactHandler={addContactHandler}/>
-              // )} 
+            />
+            <Route path="/edit" 
+              render = {(props) => (
+                <EditContact {...props} updateContactHandler={updateContactHandler}/>
+              )}
             />
             <Route path="/contact/:id" component={ContactDetail}/>
 
