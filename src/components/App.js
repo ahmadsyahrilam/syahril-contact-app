@@ -29,7 +29,9 @@ function App() {
       id: uuid(),
       ...contact //destructuring of the contact
     }
+
     const response = await api.post("/contacts", request) //call api
+    console.log(response);
     setContacts([...contacts, response.data]); 
   };
 
@@ -38,7 +40,8 @@ function App() {
      * create copy of the contact first
      * pass the handler at return --> 'getContactId={removeContactHandler}' 
      */
-    const removeContactHandler = (id) => {
+    const removeContactHandler = async (id) => {
+      await api.delete(`/contacts/${id}`);
                               //get copy then filter out contact
       const newContactList = contacts.filter((contact) => {
         return contact.id !== id;
