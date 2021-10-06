@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/syahril-contact-app/static/css/main.4b1e6eb7.chunk.css",
+    "main.js": "/syahril-contact-app/static/js/main.e2eecaa7.chunk.js",
+    "main.js.map": "/syahril-contact-app/static/js/main.e2eecaa7.chunk.js.map",
+    "runtime-main.js": "/syahril-contact-app/static/js/runtime-main.5a880a6c.js",
+    "runtime-main.js.map": "/syahril-contact-app/static/js/runtime-main.5a880a6c.js.map",
+    "static/js/2.92c2c40c.chunk.js": "/syahril-contact-app/static/js/2.92c2c40c.chunk.js",
+    "static/js/2.92c2c40c.chunk.js.map": "/syahril-contact-app/static/js/2.92c2c40c.chunk.js.map",
+    "index.html": "/syahril-contact-app/index.html",
+    "static/css/main.4b1e6eb7.chunk.css.map": "/syahril-contact-app/static/css/main.4b1e6eb7.chunk.css.map",
+    "static/js/2.92c2c40c.chunk.js.LICENSE.txt": "/syahril-contact-app/static/js/2.92c2c40c.chunk.js.LICENSE.txt",
+    "static/media/user.cc79b841.jpg": "/syahril-contact-app/static/media/user.cc79b841.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5a880a6c.js",
+    "static/js/2.92c2c40c.chunk.js",
+    "static/css/main.4b1e6eb7.chunk.css",
+    "static/js/main.e2eecaa7.chunk.js"
+  ]
+}
