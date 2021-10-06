@@ -1,9 +1,12 @@
 {
+  "homepage": "https://ahmadsyahrilam.github.io/syahril-contact-app",
   "name": "server-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "json-server -p 3006 -w db.json"
   },
   "keywords": [],
